@@ -1,3 +1,37 @@
+const app = require('../../lib/app');
+// const testHelper = require('../helpers/test-helper');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const assert = chai.assert;
+
+describe('restaurant API', () => {
+    //   let testRestaurant = testHelper.restaurant;
+    //   let testReview = testHelper.review;
+    const req = chai.request(app);
+
+    let testRestaurant = {
+        name: 'Food Coma',
+        address: {
+            street: 'Main Street',
+            city: 'Any City'
+        },
+        cuisine: 'other',
+        reviews: []
+    };
+    it('POST /restaurant', () => {
+        return req.post('/restaurant')
+            .send({restaurant: testRestaurant})
+            .then(res => {
+                console.log('success: ', res);
+            })
+
+    })
+
+})
+
+
+
 //   * POST two restaurants, each of a different type of cuisine
 //   * **Test** that `GET` `/restaurants` returns both restaurants
 //   * **Test** that `GET` `/restaurants?cuisine=<one of the cuisines>` only returns one of the restaurants
