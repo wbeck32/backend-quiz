@@ -6,7 +6,7 @@ Create an express/node/mongoose/mongo server for simple restaurant review site.
 
 * You must complete this work on your own within the alotted time
   * Keep a good commit history to show progression of work.
-* You may use normal resources that a software developer wold use on the job (docs, google, your prior work)
+* You may use normal resources that a software developer uses on the job (docs, google, your prior work)
 * You may install npm packages of your choosing
 * Use general best practices and common sense
   * Highly recommended to implement what is needed, no more no less
@@ -25,7 +25,7 @@ any data format requirements (do whatever you need to with `__v` to get to passi
 * Do a fork and PR like a normal lab
 * Include travis info. Having a green travis on your PR will count significantly.
 * Include a `server.js` for running your server normally
-* Include normal npm, git, lint, etc files
+* Include normal `npm`, `git`, `lint`, etc files
 
 ## API Requirements
 
@@ -69,7 +69,7 @@ Okay to include empty `reviews` array (see below)
 * All fields are required, otherwise return 400 error
 * Reviews should be stored in same format indicated above on the restaurant document in a `reviews`
 property, which is an array of reviews.
-* You need to check if that user (via email) has already created a review for this restaurant. If they 
+* You need to check if that user (via `email` prop) has already created a review for this restaurant. If they 
 have, return 400 error and don't save the review.
 
 ### Retrieve list of restuarants and their reviews
@@ -96,10 +96,11 @@ Same as above, except only return restaurants that match that cuisine
 
 ## Testing
 
-You only need to include the following e2e test scenario:
+You only need to include the following e2e test scenario (note that only things marked **Test** 
+need to assert correctness):
 
 * Connect to a test databse and drop database before test
-* Test this workflow (does not need to be in 1 `it`):
+* Test this workflow (structure into `describe`/`it`):
   * POST two restaurants, each of a different type of cuisine
   * **Test** that `GET` `/restaurants` returns both restaurants
   * **Test** that `GET` `/restaurants?cuisine=<one of the cuisines>` only returns one of the restaurants
