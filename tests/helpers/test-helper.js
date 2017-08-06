@@ -29,14 +29,5 @@ module.exports = {
                 testRestaurant.__v = body.__v;
                 return testRestaurant;
             })
-    },
-    saveReview(testReview) {
-        return request.post('/')
-            .send(testReview)
-            .then(({ body }) => {
-                testReview._id = body._id;
-                testReview.__v = body.__v;
-                return testReview;
-            })
     }
 }
