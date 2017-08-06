@@ -1,31 +1,22 @@
 const app = require('../../lib/app');
-// const testHelper = require('../helpers/test-helper');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const assert = chai.assert;
+const testHelper = require('../helpers/test-helper');
 
 describe('restaurant API', () => {
-    //   let testRestaurant = testHelper.restaurant;
-    //   let testReview = testHelper.review;
     const req = chai.request(app);
 
-    let testRestaurant = {
-        name: 'Food Coma',
-        address: {
-            street: 'Main Street',
-            city: 'Any City'
-        },
-        cuisine: 'other',
-        reviews: []
-    };
+    let testRestaurant = testHelper.restaurant;
+    let testReview = testHelper.review;
+
     it('POST /restaurant', () => {
         return req.post('/restaurant')
-            .send({restaurant: testRestaurant})
+            .send(testRestaurant)
             .then(res => {
-                console.log('success: ', res);
+                console.log('success: ', res.body);
             })
-
     })
 
 })

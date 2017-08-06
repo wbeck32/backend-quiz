@@ -25,9 +25,8 @@ module.exports = {
         return request.post('/restaurant')
             .send(testRestaurant)
             .then(({ body }) => {
-                console.log('rest: ',body);
-                // testRestaurant._id = body._id;
-                // testRestaurant.__v = body.__v;
+                testRestaurant._id = body._id;
+                testRestaurant.__v = body.__v;
                 return testRestaurant;
             })
     },
@@ -35,9 +34,8 @@ module.exports = {
         return request.post('/')
             .send(testReview)
             .then(({ body }) => {
-                console.log('rev: ',body);
-                // testReview._id = body._id;
-                // testReview.__v = body.__v;
+                testReview._id = body._id;
+                testReview.__v = body.__v;
                 return testReview;
             })
     }
