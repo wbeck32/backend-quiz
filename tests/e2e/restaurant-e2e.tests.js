@@ -16,11 +16,9 @@ describe('restaurant API', () => {
         mongoose.connection.dropDatabase();
     });
 
-    let testRestA = testHelper.restaurantA;
-    let testRestB = testHelper.restaurantB;
-    let testRestC = testHelper.restaurantC;
+    let [testRestA, testRestB, testRestC] = testHelper.restaurants;
 
-    it('POST /restaurant two restaurants and retrieve them ', () => {
+    it('POST two restaurants and retrieve them ', () => {
             return testHelper.saveTwoRestaurants(testRestA, testRestB)
                 .then(two => {
                     assert.equal(two[0].name, 'Food Coma');
@@ -31,7 +29,7 @@ describe('restaurant API', () => {
                         })
                 });
         }),
-        it('GETs restaurant by id /restaurant/:id', () => {
+        it('GET restaurant by id', () => {
             return testHelper.saveRestaurant(testRestC)
                 .then(restaurant => {
                     testRestC = restaurant;
@@ -43,20 +41,41 @@ describe('restaurant API', () => {
 
                 })
         }),
-        it('GETs restaurant by cuisine /restaurants', () => {
+        it('GET restaurant by cuisine', () => {
             return testHelper.saveTwoRestaurants(testRestA, testRestB)
                 .then(two => {
                     assert.equal(two[0].name, 'Food Coma');
                     return req.get('/restaurants')
                         .query({ cuisine: 'comfort' })
                         .then(results => {
-                            assert.equal(results.body[0].cuisine, 'comfort');
+                            assert.equal(results.body.length, 1);
                         })
-                });
+                })
+        }),
+        it.skip('POST three reviews from three different users', () => {
+            return testHelper.saveReviewsArray()
+                .then(res => {
+                    console.log('in test: ',res);
+                })
         })
-})
+});
 
 
+
+
+//    assert.equal(saved.name, 'Food Coma');
+//     return req.post('/reviews')
+//         .send({ restaurantId: saved._id, reviews: testHelper.reviews })
+//         .then(results => {
+//             // console.log(results);
+//             // assert.equal(results.body[0].cuisine, 'comfort');
+//             return req.post('/reviews')
+//                 .send({ restaurantId: saved._id, reviews: testHelper.dupeReview })
+//                 .then(results => {
+//                     // console.log(results);
+//                     // assert.equal(results.body[0].cuisine, 'comfort');
+//                 })
+//         })
 
 //   * POST two restaurants, each of a different type of cuisine
 //   * **Test** that `GET` `/restaurants` returns both restaurants
