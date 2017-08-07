@@ -1,22 +1,31 @@
 const app = require('../../lib/app');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-chai.use(chaiHttp);
 const assert = chai.assert;
+require('dotenv').config()
+const dbUri = process.env.MONGO_URI;
+const connect = require('../../lib/connect');
+const mongoose = require('mongoose');
 const testHelper = require('../helpers/test-helper');
 
 describe('restaurant API', () => {
-    const req = chai.request(app);
+    before(() => {
+        connect(dbUri);
+        mongoose.connection.dropDatabase();
+    });
 
-    let testRestaurant = testHelper.restaurant;
-    let testReview = testHelper.review;
+    let testRestaurantA = testHelper.restaurantA;
+    let testRestaurantB = testHelper.restaurantB;
 
     it('POST /restaurant', () => {
-        return req.post('/restaurant')
-            .send(testRestaurant)
-            .then(res => {
-                console.log('success: ', res.body);
-            })
+        return Promise.all([
+                testHelper.saveRestaurant(testRestaurantA)
+                .then(restaurant => testRestaurantA = restaurant),
+                testHelper.saveRestaurant(testRestaurantB)
+                .then(restaurant => testRestaurantB = restaurant)
+            ])
+            .then(() => {
+                assert.equal(testRestaurantA.name, 'Food Coma');
+            });
     })
 })
 

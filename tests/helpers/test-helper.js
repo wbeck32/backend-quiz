@@ -6,8 +6,18 @@ const request = chai.request(app);
 
 module.exports = {
 
-    restaurant: {
+    restaurantA: {
         name: 'Food Coma',
+        address: {
+            street: 'Main Street',
+            city: 'Any City'
+        },
+        cuisine: 'other',
+        reviews: []
+    },
+
+        restaurantB: {
+        name: 'Next Door to Food Coma',
         address: {
             street: 'Main Street',
             city: 'Any City'
