@@ -12,7 +12,7 @@ module.exports = {
         reviews: []
     },
 
-        restaurantB: {
+    restaurantB: {
         name: 'Next Door to Food Coma',
         address: {
             street: 'Main Street',
@@ -21,6 +21,16 @@ module.exports = {
         cuisine: 'comfort',
         reviews: []
     },
+    restaurantC: {
+        name: 'Yama',
+        address: {
+            street: 'NW 11th Avenue',
+            city: 'Portland'
+        },
+        cuisine: 'euro',
+        reviews: []
+    },
+
 
     review: {
         rating: 5,
@@ -34,6 +44,17 @@ module.exports = {
                 testRestaurant._id = body._id;
                 testRestaurant.__v = body.__v;
                 return testRestaurant;
+            })
+    },
+    saveTwoRestaurants(testRestaurantA, testRestaurantB) {
+        return Promise.all([
+                this.saveRestaurant(testRestaurantA)
+                .then(restaurant => testRestaurantA = restaurant),
+                this.saveRestaurant(testRestaurantB)
+                .then(restaurant => testRestaurantB = restaurant)
+            ])
+            .then(two => {
+                return two;
             })
     }
 }

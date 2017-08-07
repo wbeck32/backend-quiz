@@ -10,31 +10,49 @@ const testHelper = require('../helpers/test-helper');
 const req = require('../helpers/request');
 
 describe('restaurant API', () => {
-    before(() => {
-        connect(dbUri);
+    connect(dbUri);
+
+    beforeEach(() => {
         mongoose.connection.dropDatabase();
     });
 
-    let testRestaurantA = testHelper.restaurantA;
-    let testRestaurantB = testHelper.restaurantB;
+    let testRestA = testHelper.restaurantA;
+    let testRestB = testHelper.restaurantB;
+    let testRestC = testHelper.restaurantC;
 
-    it('POST two restaurants /restaurant', () => {
-            return Promise.all([
-                    testHelper.saveRestaurant(testRestaurantA)
-                    .then(restaurant => testRestaurantA = restaurant),
-                    testHelper.saveRestaurant(testRestaurantB)
-                    .then(restaurant => testRestaurantB = restaurant)
-                ])
-                .then(() => {
-                    assert.equal(testRestaurantA.name, 'Food Coma');
+    it('POST /restaurant two restaurants and retrieve them ', () => {
+            return testHelper.saveTwoRestaurants(testRestA, testRestB)
+                .then(two => {
+                    assert.equal(two[0].name, 'Food Coma');
+                    return req.get('/restaurants')
+                        .then(results => {
+                            assert.equal(results.body.length, 2);
+                            assert.equal(two[1].name, 'Next Door to Food Coma');
+                        })
                 });
         }),
-        it('GETs all restaurants /restaurants', () => {
-            return req.get('/restaurants')
-                .then(results => {
-                    assert.equal(results.body.length,2);
-                    // console.log(results.body);
+        it('GETs restaurant by id /restaurant/:id', () => {
+            return testHelper.saveRestaurant(testRestC)
+                .then(restaurant => {
+                    testRestC = restaurant;
+                    return req.get('/restaurant/:id')
+                        .send({ id: testRestC._id })
+                        .then(found => {
+                            assert.deepEqual(found.body, testRestC);
+                        })
+
                 })
+        }),
+        it('GETs restaurant by cuisine /restaurants', () => {
+            return testHelper.saveTwoRestaurants(testRestA, testRestB)
+                .then(two => {
+                    assert.equal(two[0].name, 'Food Coma');
+                    return req.get('/restaurants')
+                        .query({ cuisine: 'comfort' })
+                        .then(results => {
+                            assert.equal(results.body[0].cuisine, 'comfort');
+                        })
+                });
         })
 })
 
