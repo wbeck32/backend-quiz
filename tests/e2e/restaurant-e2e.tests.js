@@ -1,11 +1,13 @@
 const app = require('../../lib/app');
 const chai = require('chai');
 const assert = chai.assert;
-require('dotenv').config()
+require('dotenv')
+    .config()
 const dbUri = process.env.MONGO_URI;
 const connect = require('../../lib/connect');
 const mongoose = require('mongoose');
 const testHelper = require('../helpers/test-helper');
+const req = require('../helpers/request');
 
 describe('restaurant API', () => {
     before(() => {
@@ -16,17 +18,24 @@ describe('restaurant API', () => {
     let testRestaurantA = testHelper.restaurantA;
     let testRestaurantB = testHelper.restaurantB;
 
-    it('POST /restaurant', () => {
-        return Promise.all([
-                testHelper.saveRestaurant(testRestaurantA)
-                .then(restaurant => testRestaurantA = restaurant),
-                testHelper.saveRestaurant(testRestaurantB)
-                .then(restaurant => testRestaurantB = restaurant)
-            ])
-            .then(() => {
-                assert.equal(testRestaurantA.name, 'Food Coma');
-            });
-    })
+    it('POST two restaurants /restaurant', () => {
+            return Promise.all([
+                    testHelper.saveRestaurant(testRestaurantA)
+                    .then(restaurant => testRestaurantA = restaurant),
+                    testHelper.saveRestaurant(testRestaurantB)
+                    .then(restaurant => testRestaurantB = restaurant)
+                ])
+                .then(() => {
+                    assert.equal(testRestaurantA.name, 'Food Coma');
+                });
+        }),
+        it('GETs all restaurants /restaurants', () => {
+            return req.get('/restaurants')
+                .then(results => {
+                    assert.equal(results.body.length,2);
+                    // console.log(results.body);
+                })
+        })
 })
 
 
