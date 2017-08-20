@@ -69,18 +69,6 @@ module.exports = {
                 return testRest;
             })
     },
-    saveTwoRestaurants(testRestA, testRestB) {
-        // clunky!!!
-        return Promise.all([
-                this.saveRestaurant(testRestA)
-                .then(restaurant => testRestA = restaurant),
-                this.saveRestaurant(testRestB)
-                .then(restaurant => testRestB = restaurant)
-            ])
-            .then(two => {
-                return two;
-            })
-    },
     saveReviewsArray() {
         return this.saveRestaurant(this.restaurants[0])
             .then(saved => {
