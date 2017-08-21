@@ -23,7 +23,7 @@ describe('restaurant API', () => {
     .post('/')
     .send(testRestA)
     .then(res => {
-      console.log('B: ', res.error);
+      console.log('B: ', res.body);
       return req.post('/')
       .send(testRestB)
       .then(res => {
