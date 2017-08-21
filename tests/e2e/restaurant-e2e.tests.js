@@ -96,18 +96,19 @@ describe('restaurant API', () => {
   it('POST a 4th review from same reviewer, 400 returned and rest still has 3 reviews', () =>{
     console.log(reviewedRest_id)
 
-      return req.post('/:id/reviews')
-      .send({ review: testHelper.reviews[0], restId: reviewedRest_id })
-      .then(res => {
-        console.log('RES: ',res.body)
-        assert.equal(res.status, 400)
+    return req.post('/:id/reviews')
+    .send({ review: testHelper.reviews[0], restId: reviewedRest_id })
+    .then(res => {
+      // console.log('RES: ',res.body)
+      // assert.equal(res.status, 400)
+      return res.body._id
     })
-    .then(()=> {
-      return req.get('/restaurants')
-      .send({ id: reviewedRest_id })
+    .then(id => {
+      return req.get('/:id')
+      .send({ id: id})
       .then(restaurant => {
-        console.log(restaurant);
-        assert.equal(restaurant.reviews.length, 3);
+        // console.log('REST: ',restaurant.body);
+        assert.equal(restaurant.body.reviews.length, 3);
       })
     })
   })
