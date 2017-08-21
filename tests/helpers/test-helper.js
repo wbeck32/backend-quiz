@@ -29,6 +29,15 @@ module.exports = {
             },
             cuisine: 'euro',
             reviews: []
+        },
+        {
+            name: 'Food Coma',
+            address: {
+                street: 'Main Street',
+                city: 'Any City'
+            },
+            cuisine: '',
+            reviews: []
         }
     ],
 

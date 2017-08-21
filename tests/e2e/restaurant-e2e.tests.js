@@ -15,17 +15,18 @@ describe('restaurant API', () => {
     mongoose.connection.dropDatabase();
   });
 
-  let [testRestA, testRestB, testRestC] = testHelper.restaurants;
+  let [testRestA, testRestB, testRestC, testRestD] = testHelper.restaurants;
+  let reviewedRest_id = '';
 
   it('POST two restaurants and retrieve them ', () => {
     return req
     .post('/')
     .send(testRestA)
     .then(res => {
+      console.log('B: ', res.error);
       return req.post('/')
       .send(testRestB)
       .then(res => {
-        // console.log('B: ', res.body);
       })
     })
     .then(() => {
@@ -57,27 +58,57 @@ describe('restaurant API', () => {
     });
   }),
   it('POST three reviews from three different users', () => {
+    let restArr = [];
     return req.get('/restaurants')
-    .then(results => {
-      return results.body;
-    })
     .then(restaurants => {
+      restArr = restaurants.body
+      return restArr;
+    })
+    .then(restArr =>{
       return req.post('/:id/reviews')
-      .send({ review: testHelper.reviews[0], restId: restaurants[0]._id })
+      .send({ review: testHelper.reviews[0], restId: restArr[0]._id })
+      .then(saved1 => {
+        // console.log('saved1: ', saved1.body)
+        reviewedRest_id = restArr[0]._id;
+        return saved1;
+      })
       .then(saved1 => {
         return req.post('/:id/reviews')
-        .send({ review: testHelper.reviews[1], restId: restaurants[1]._id })
-      })
-      .then(saved2 =>{
-        return req.post('/:id/reviews')
-        .send({ review: testHelper.reviews[2], restId: restaurants[2]._id })
-      })
-      .then(saved3 => {
-        return saved3
+        .send({ review: testHelper.reviews[1], restId: restArr[0]._id })
+        .then(saved2 => {
+          // console.log('saved2: ', saved2.body)
+          return saved2;
+        })
+        .then(saved2 => {
+          return req.post('/:id/reviews')
+          .send({ review: testHelper.reviews[2], restId: restArr[0]._id })
+          .then(saved3 => {
+            // console.log('saved3: ', saved3.body)
+            return saved3
+          })
+          .then(() =>{
+            console.log('all saved');
+          })
+        })
       })
     })
-    .then(() =>{
-      console.log('all saved');
+  })
+  it('POST a 4th review from same reviewer, 400 returned and rest still has 3 reviews', () =>{
+    console.log(reviewedRest_id)
+
+      return req.post('/:id/reviews')
+      .send({ review: testHelper.reviews[0], restId: reviewedRest_id })
+      .then(res => {
+        console.log('RES: ',res.body)
+        assert.equal(res.status, 400)
+    })
+    .then(()=> {
+      return req.get('/restaurants')
+      .send({ id: reviewedRest_id })
+      .then(restaurant => {
+        console.log(restaurant);
+        assert.equal(restaurant.reviews.length, 3);
+      })
     })
   })
 })
