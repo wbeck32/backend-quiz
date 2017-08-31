@@ -9,26 +9,13 @@ describe('pet routes tests', () => {
     await connect();
     await connection.dropDatabase();
   });
-
-  it('POST two pets of different types', async () => {
-
-  }),
-  it('POST two raves from one user email to both of the pets', async () => {
-
-  }),
-  it('POST one rave from another user email to both of the pets', async () => {
-
-  }),
-  it('GET /pets returns both pets', async () => {
-
-  }),
-  it('GET /pets?type=<one type> only returns the correct pet', async () => {
-
-  }),
-  it('GET /raves returns all four raves plus pet name & type', async () => {
-
-  }),
-  it('GET /pets/:id for one of the pets returns all fields and has the two reviews', async () => {
-
-  })
+  it('POST two pets of different types', async () => {}),
+    it('GET /pets returns both pets', async () => {}),
+    it('GET /pets?type=<one type> only returns the correct pet', async () => {}),
+    it('GET /pets/:id for one of the pets returns all fields and has the two reviews', async () => {});
+});
+describe('rave routes tests', () => {
+  it('POST two raves from one user email to both of the pets', async () => {}),
+    it('POST two raves from another user email to both of the pets', async () => {}),
+    it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {});
 });
