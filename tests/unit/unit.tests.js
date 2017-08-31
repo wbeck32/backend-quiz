@@ -1,1 +1,1 @@
-// validate restaurant model
+// validate pet and rave model
