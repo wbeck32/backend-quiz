@@ -1,7 +1,6 @@
 const { assert } = require('chai');
 const {petModelValid, petModelInvalid, raveModelValid, raveModelInvalid } = require('../helpers/test-helper')
 
-
 describe('Pet model tests', () => {
   it('Pet model passes validation', async () => {
     const passPetValidate = await petModelValid

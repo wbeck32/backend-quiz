@@ -3,13 +3,26 @@ const assert = chai.assert;
 const connect = require('../../src/connect');
 const connection = require('mongoose').connection;
 const req = require('../helpers/request');
+let {
+  birdPet,
+  fishPet,
+  raveOne,
+  raveTwo,
+  raveThree,
+  raveFour
+} = require('../helpers/test-helper');
 
 describe('pet routes tests', () => {
   before(async () => {
     await connect();
     await connection.dropDatabase();
   });
-  it('POST two pets of different types', async () => {}),
+  it.only('POST two pets of different types', async () => {
+    const postBird = await req.post('/pet').send(birdPet);
+    const postFish = await req.post('/pet').send(fishPet);
+    assert.equal(postBird.status, 200);
+    assert.equal(postFish.body.name, 'Wallace');
+  }),
     it('GET /pets returns both pets', async () => {}),
     it('GET /pets?type=<one type> only returns the correct pet', async () => {});
 });
