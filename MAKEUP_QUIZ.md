@@ -22,7 +22,7 @@ any data format requirements (do whatever you need to with `__v` to get to passi
 * Demonstrating what you know by having green tests that pass and show working code.
 
 ## Overarching requirements
-* Do a fork and PR like a normal lab
+* Ask instructor or TA to create another named branch, i.e. martypdx_makeup. Submit your PR against this branch
 * Include travis info. Having a green travis on your PR will count significantly.
 * Include a `server.js` for running your server normally
 * Include normal `npm`, `git`, `lint`, etc., etc., files
