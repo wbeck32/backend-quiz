@@ -1,7 +1,7 @@
-const app = require('../../lib/app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-const request = chai.request(app);
+const app = require('../../src/app');
+const req = chai.request(app);
 
-module.exports = request;
+module.exports = req;
