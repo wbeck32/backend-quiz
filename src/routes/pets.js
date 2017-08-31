@@ -10,6 +10,11 @@ router
   const response = await pet.save(pet);
   res.send(response);
 })
+.get('/', async (req, res, next) => {
+  const allPets = await Pet.find()
+  res.send(allPets)
+
+})
 
 
 

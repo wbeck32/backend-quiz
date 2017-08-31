@@ -17,13 +17,17 @@ describe('pet routes tests', () => {
     await connect();
     await connection.dropDatabase();
   });
-  it.only('POST two pets of different types', async () => {
+  it('POST two pets of different types', async () => {
     const postBird = await req.post('/pet').send(birdPet);
     const postFish = await req.post('/pet').send(fishPet);
     assert.equal(postBird.status, 200);
     assert.equal(postFish.body.name, 'Wallace');
   }),
-    it('GET /pets returns both pets', async () => {}),
+    it('GET /pets returns both pets', async () => {
+      const allPets = await req.get('/pets')
+      assert.equal(allPets.body.length, 2);
+      assert.equal(allPets.status, 200)
+    }),
     it('GET /pets?type=<one type> only returns the correct pet', async () => {});
 });
 describe('rave routes tests', () => {
