@@ -24,15 +24,24 @@ describe('pet routes tests', () => {
     assert.equal(postFish.body.name, 'Wallace');
   }),
     it('GET /pets returns both pets', async () => {
-      const allPets = await req.get('/pets')
+      const allPets = await req.get('/pets');
       assert.equal(allPets.body.length, 2);
-      assert.equal(allPets.status, 200)
+      assert.equal(allPets.status, 200);
     }),
-    it('GET /pets?type=<one type> only returns the correct pet', async () => {});
+    it('GET /pets?type=<one type> only returns the correct pet', async () => {
+      const getBird = await req.get('/pets').query({ type: 'bird' });
+      assert.equal(getBird.status, 200);
+    });
 });
 describe('rave routes tests', () => {
-  it('POST two raves from one user email to both of the pets', async () => {}),
-    it('POST two raves from another user email to both of the pets', async () => {}),
+  it('POST two raves from one user email to both of the pets', async () => {
+    // const birdRaveOne = await req.post('/raves').send(raveOne);
+    // const birdRaveTwo = await req.post('/raves').send(raveTwo);
+  }),
+    it('POST two raves from another user email to both of the pets', async () => {
+      // const birdRaveOne = await req.post('/raves').send(raveThree);
+      // const birdRaveTwo = await req.post('/raves').send(raveFour);
+    }),
     it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {}),
     it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {});
 });

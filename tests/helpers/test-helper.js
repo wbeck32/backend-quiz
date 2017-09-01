@@ -49,7 +49,7 @@ module.exports = {
     pet: '',
     comments:
       'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by',
-    email: 'tokenJoe@token.com'
+    email: 'PET@PETME.COM'
   }),
   raveThree: new Rave({
     pet: '',
@@ -61,6 +61,6 @@ module.exports = {
     pet: '',
     comments:
       'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so.',
-    email: 'lovePetz@example.com'
+    email: 'LARRY@koala.com'
   })
 };
