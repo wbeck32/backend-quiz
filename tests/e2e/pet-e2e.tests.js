@@ -34,8 +34,12 @@ describe('e2e routes tests', () => {
     });
 
   it('POST two raves from one user email to both of the pets', async () => {
-    const savedRaveOne = await req.post('/raves').send({rave: raveOne, type: 'bird'});
-    const savedRaveTwo = await req.post('/raves').send({rave: raveTwo, type: 'bird'});
+    const savedRaveOne = await req
+      .post('/raves')
+      .send({ rave: raveOne, type: 'bird' });
+    const savedRaveTwo = await req
+      .post('/raves')
+      .send({ rave: raveTwo, type: 'bird' });
     assert.equal(savedRaveOne.body.email, 'pet@petme.com');
     assert.equal(savedRaveTwo.body.email, 'pet@petme.com');
     assert.deepEqual(savedRaveOne.body.pet, savedRaveTwo.body.pet);
@@ -49,8 +53,12 @@ describe('e2e routes tests', () => {
     ]);
   }),
     it('POST two raves from another user email to both of the pets', async () => {
-      const savedRaveThree = await req.post('/raves').send({rave: raveThree, type: 'fish'});
-      const savedRaveFour = await req.post('/raves').send({rave: raveFour, type: 'fish'});
+      const savedRaveThree = await req
+        .post('/raves')
+        .send({ rave: raveThree, type: 'fish' });
+      const savedRaveFour = await req
+        .post('/raves')
+        .send({ rave: raveFour, type: 'fish' });
       assert.equal(savedRaveThree.body.email, 'larry@koala.com');
       assert.equal(savedRaveFour.body.email, 'larry@koala.com');
       assert.deepEqual(savedRaveThree.body.pet, savedRaveFour.body.pet);
@@ -65,7 +73,14 @@ describe('e2e routes tests', () => {
     }),
     it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {
       const getRaves = await req.get('/raves');
-      // console.log('GETRAVES: ', getRaves.body)
+      const wallace = getRaves.body.filter(pet => pet.pet.name === 'Wallace');
+      const purdy = getRaves.body.filter(pet => pet.pet.name === 'Purdy');
+      assert.lengthOf(getRaves.body, 4);
+      assert.lengthOf(wallace, 2);
+      assert.lengthOf(purdy, 2);
     }),
-    it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {});
+    it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {
+      const allPets = await req.get('/pets');
+      // console.log('allPets :', allPets.body[0]);
+    });
 });
