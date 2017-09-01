@@ -5,10 +5,10 @@ describe('Pet model tests', () => {
   it('Pet model passes validation', async () => {
     const passPetValidate = await petModelValid
       .validate(res => {
-        assertEqual(res, null);
+        assert.isNull(res);
       })
       .catch(errors => {
-        assertEqual(errors, null);
+        assert.isNull(errors);
       });
   }),
   it('Pet model fails validation', async () => {
@@ -28,10 +28,10 @@ describe('Rave model tests', () => {
   it('Rave model passes validation', async () => {
     const passRaveValidate = await raveModelValid
     .validate(res => {
-      assertEqual(res, null);
+      assert.isNull(res);
     })
     .catch(errors => {
-      assertEqual(errors, null);
+      assert.isNull(errors);
     });
   }),
   it('Rave model fails validation', async () => {

@@ -35,9 +35,10 @@ describe('pet routes tests', () => {
 });
 describe('rave routes tests', () => {
   it('POST two raves from one user email to both of the pets', async () => {
-    const birdRaveOne = await req.post('/raves').send(raveOne);
-    const birdRaveTwo = await req.post('/raves').send(raveTwo);
-    console.log(birdRaveOne, birdRaveTwo)
+    const savedRaveOne = await req.post('/raves').send(raveOne);
+    const savedRaveTwo = await req.post('/raves').send(raveTwo);
+    assert.equal(savedRaveOne.body.email,'pet@petme.com');
+    assert.hasAllKeys(savedRaveTwo.body, ['__v', '_id', 'comments', 'email', 'pet']);
   }),
     it('POST two raves from another user email to both of the pets', async () => {
       // const birdRaveOne = await req.post('/raves').send(raveThree);
