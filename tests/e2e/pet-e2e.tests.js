@@ -42,6 +42,8 @@ describe('rave routes tests', () => {
       // const birdRaveOne = await req.post('/raves').send(raveThree);
       // const birdRaveTwo = await req.post('/raves').send(raveFour);
     }),
-    it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {}),
+    it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {
+      const getRaves = await req.get('/raves');
+    }),
     it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {});
 });
