@@ -9,8 +9,7 @@ const petSchema = new Schema({
     enum: ['cat', 'dog', 'bird', 'fish', 'snake']
   },
   breed: { type: String, required: false },
-  catchPhrase: { type: String, required: false, maxlength: 140 },
-  raves: {type: mongoose.SchemaTypes.Array, required:false, ref: 'Rave'}
+  catchPhrase: { type: String, required: false, maxlength: 140 }
 });
 
 module.exports = mongoose.model('Pet', petSchema);

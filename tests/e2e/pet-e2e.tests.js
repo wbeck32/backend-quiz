@@ -12,8 +12,14 @@ let {
   raveFour
 } = require('../helpers/test-helper');
 
-describe('pet routes tests', () => {
+describe('e2e routes tests', () => {
   before(async () => {
+    // let birdPet,
+    //   fishPet,
+    //   raveOne,
+    //   raveTwo,
+    //   raveThree,
+    //   raveFour = null;
     await connect();
     await connection.dropDatabase();
   });
@@ -32,8 +38,7 @@ describe('pet routes tests', () => {
       const getBird = await req.get('/pets').query({ type: 'bird' });
       assert.equal(getBird.status, 200);
     });
-});
-describe('rave routes tests', () => {
+
   it('POST two raves from one user email to both of the pets', async () => {
     const savedRaveOne = await req.post('/raves').send(raveOne);
     const savedRaveTwo = await req.post('/raves').send(raveTwo);
@@ -42,7 +47,6 @@ describe('rave routes tests', () => {
     assert.deepEqual(savedRaveOne.body.pet, savedRaveTwo.body.pet);
     assert.equal(savedRaveTwo.body.email, savedRaveOne.body.email);
     assert.hasAllKeys(savedRaveTwo.body, [
-      '__v',
       '_id',
       'comments',
       'email',
@@ -57,7 +61,6 @@ describe('rave routes tests', () => {
       assert.deepEqual(savedRaveThree.body.pet, savedRaveFour.body.pet);
       assert.equal(savedRaveFour.body.email, savedRaveThree.body.email);
       assert.hasAllKeys(savedRaveFour.body, [
-        '__v',
         '_id',
         'comments',
         'email',
