@@ -13,7 +13,6 @@ const {
   raveThree,
   raveFour
 } = require('../helpers/test-helper');
-var mongoose = require('mongoose');
 
 describe('e2e routes tests', () => {
   before(async () => {
