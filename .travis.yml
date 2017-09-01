@@ -5,3 +5,9 @@ node_js:
 sudo: false
 services:
  - mongodb
+addons:
+  apt:
+    sources:
+    - mongodb
+    packages:
+    - mongodb-org-server
