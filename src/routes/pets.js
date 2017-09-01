@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 var mongoose = require('mongoose');
-const Pet = require('../models/Pet');
-const Rave = require('../models/Rave');
+const Pet = require('../models/Pet.js');
+const Rave = require('../models/Rave.js');
 
 router
   .post('/', async (req, res, next) => {
