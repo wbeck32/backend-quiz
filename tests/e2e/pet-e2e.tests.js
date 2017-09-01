@@ -3,8 +3,6 @@ const assert = chai.assert;
 const connect = require('../../src/connect');
 const connection = require('mongoose').connection;
 const req = require('../helpers/request');
-const Pet = require('../../src/models/Pet');
-const Rave = require('../../src/models/Rave');
 const {
   birdPet,
   fishPet,

@@ -4,7 +4,7 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "mocha tests --recursive",
+        "test": "mocha tests --recursive --reporter mocha-better-spec-reporter",
         "start": "nodemon --watch lib --watch tests --exec 'npm test'"
     },
     "repository": {

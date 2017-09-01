@@ -5,3 +5,5 @@ node_js:
 sudo: false
 services:
 - mongod
+- mongodb-3.4-precise
+- mongodb-org-server
