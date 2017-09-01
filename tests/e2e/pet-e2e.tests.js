@@ -81,13 +81,12 @@ describe('e2e routes tests', () => {
       assert.lengthOf(wallace, 2);
       assert.lengthOf(purdy, 2);
     }),
-    it.skip('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {
+    it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {
       const allPets = await req.get('/pets');
       const id = allPets.body[0]._id;
-      // const id = mongoose.Types.ObjectId(allPets.body[0]._id);
-      // console.log(id, typeof id)
       const onePet = await req
-        .get('/pets/:id')
-        .send({ id: id});
+        .get(`/pets/${id}`)
+        assert.lengthOf(onePet.body, 2)
+
     });
 });

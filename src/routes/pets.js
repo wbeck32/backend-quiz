@@ -15,17 +15,11 @@ router
     res.send(allPets);
   })
   .get('/:id', async (req, res, next) => {
-    let { id } = req.body;
-    console.log('id1: ',id, typeof id)
-    id = mongoose.Types.ObjectId(id);
-    console.log('id2: ',id, typeof id)
+    let { id } = req.params;
     const getById = await Pet.findOne({ _id: id });
     getById_id = mongoose.Types.ObjectId(getById._id);
-
     const raves = await Rave.find({pet: getById_id});
-    const response = getById.rave.push(raves);
-    // console.log(response)
-    res.send(response);
+    res.send(raves);
   })
   .get('/:type?', async (req, res, next) => {
     const { type } = req.query;
