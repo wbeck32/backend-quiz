@@ -4,10 +4,6 @@ node_js:
 
 sudo: false
 services:
-- mongodb
-addons:
-  apt:
-    sources:
-    - mongodb-3.4-precise
-    packages:
-    - mongodb-org-server
+- mongod
+- mongodb-3.4-precise
+- mongodb-org-server
