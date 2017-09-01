@@ -35,8 +35,9 @@ describe('pet routes tests', () => {
 });
 describe('rave routes tests', () => {
   it('POST two raves from one user email to both of the pets', async () => {
-    // const birdRaveOne = await req.post('/raves').send(raveOne);
-    // const birdRaveTwo = await req.post('/raves').send(raveTwo);
+    const birdRaveOne = await req.post('/raves').send(raveOne);
+    const birdRaveTwo = await req.post('/raves').send(raveTwo);
+    console.log(birdRaveOne, birdRaveTwo)
   }),
     it('POST two raves from another user email to both of the pets', async () => {
       // const birdRaveOne = await req.post('/raves').send(raveThree);
@@ -44,6 +45,7 @@ describe('rave routes tests', () => {
     }),
     it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {
       const getRaves = await req.get('/raves');
+      // console.log('getRaves: ', getRaves)
     }),
     it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {});
 });
