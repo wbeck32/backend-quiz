@@ -11,6 +11,8 @@ let {
   raveThree,
   raveFour
 } = require('../helpers/test-helper');
+var mongoose = require('mongoose');
+
 
 describe('e2e routes tests', () => {
   before(async () => {
@@ -79,8 +81,13 @@ describe('e2e routes tests', () => {
       assert.lengthOf(wallace, 2);
       assert.lengthOf(purdy, 2);
     }),
-    it('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {
+    it.skip('GET /pets/:id for one of the pets returns all fields and has the two raves', async () => {
       const allPets = await req.get('/pets');
-      // console.log('allPets :', allPets.body[0]);
+      const id = allPets.body[0]._id;
+      // const id = mongoose.Types.ObjectId(allPets.body[0]._id);
+      // console.log(id, typeof id)
+      const onePet = await req
+        .get('/pets/:id')
+        .send({ id: id});
     });
 });
