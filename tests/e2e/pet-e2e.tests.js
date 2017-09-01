@@ -14,12 +14,12 @@ let {
 
 describe('e2e routes tests', () => {
   before(async () => {
-    // let birdPet,
-    //   fishPet,
-    //   raveOne,
-    //   raveTwo,
-    //   raveThree,
-    //   raveFour = null;
+    let birdPet,
+      fishPet,
+      raveOne,
+      raveTwo,
+      raveThree,
+      raveFour = null;
     await connect();
     await connection.dropDatabase();
   });
@@ -47,6 +47,7 @@ describe('e2e routes tests', () => {
     assert.deepEqual(savedRaveOne.body.pet, savedRaveTwo.body.pet);
     assert.equal(savedRaveTwo.body.email, savedRaveOne.body.email);
     assert.hasAllKeys(savedRaveTwo.body, [
+      '__v',
       '_id',
       'comments',
       'email',
@@ -61,6 +62,7 @@ describe('e2e routes tests', () => {
       assert.deepEqual(savedRaveThree.body.pet, savedRaveFour.body.pet);
       assert.equal(savedRaveFour.body.email, savedRaveThree.body.email);
       assert.hasAllKeys(savedRaveFour.body, [
+        '__v',
         '_id',
         'comments',
         'email',
