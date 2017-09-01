@@ -16,8 +16,7 @@
     "bugs": {
         "url": "https://github.com/wbeck32/backend-quiz/issues"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "body-parser": "^1.17.2",
         "chai": "^4.1.0",
