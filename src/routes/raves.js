@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Pet = require('../models/');
+const Pet = require('../models/Pet');
 const Rave = require('../models/Rave');
 
 router
