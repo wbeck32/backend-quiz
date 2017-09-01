@@ -3,7 +3,9 @@ const assert = chai.assert;
 const connect = require('../../src/connect');
 const connection = require('mongoose').connection;
 const req = require('../helpers/request');
-let {
+const Pet = require('../../src/models/Pet');
+const Rave = require('../../src/models/Rave');
+const {
   birdPet,
   fishPet,
   raveOne,
@@ -12,7 +14,6 @@ let {
   raveFour
 } = require('../helpers/test-helper');
 var mongoose = require('mongoose');
-
 
 describe('e2e routes tests', () => {
   before(async () => {
