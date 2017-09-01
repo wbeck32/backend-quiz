@@ -16,7 +16,7 @@ router
   })
   .get('/', async (req, res, next) => {
     const allRaves = await Rave.find().populate('name', 'type');
-    // console.log('allRaves: ', allRaves.body);
+    console.log('allRaves: ', allRaves);
     res.send(allRaves);
   });
 

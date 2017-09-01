@@ -37,12 +37,32 @@ describe('rave routes tests', () => {
   it('POST two raves from one user email to both of the pets', async () => {
     const savedRaveOne = await req.post('/raves').send(raveOne);
     const savedRaveTwo = await req.post('/raves').send(raveTwo);
-    assert.equal(savedRaveOne.body.email,'pet@petme.com');
-    assert.hasAllKeys(savedRaveTwo.body, ['__v', '_id', 'comments', 'email', 'pet']);
+    assert.equal(savedRaveOne.body.email, 'pet@petme.com');
+    assert.equal(savedRaveTwo.body.email, 'pet@petme.com');
+    assert.equal(savedRaveOne.body.pet, savedRaveTwo.body.pet);
+    assert.equal(savedRaveTwo.body.email, savedRaveOne.body.email);
+    assert.hasAllKeys(savedRaveTwo.body, [
+      '__v',
+      '_id',
+      'comments',
+      'email',
+      'pet'
+    ]);
   }),
     it('POST two raves from another user email to both of the pets', async () => {
-      // const birdRaveOne = await req.post('/raves').send(raveThree);
-      // const birdRaveTwo = await req.post('/raves').send(raveFour);
+      const savedRaveThree = await req.post('/raves').send(raveThree);
+      const savedRaveFour = await req.post('/raves').send(raveFour);
+      assert.equal(savedRaveThree.body.email, 'larry@koala.com');
+      assert.equal(savedRaveFour.body.email, 'larry@koala.com');
+      assert.equal(savedRaveThree.body.pet, savedRaveFour.body.pet);
+      assert.equal(savedRaveFour.body.email, savedRaveThree.body.email);
+      assert.hasAllKeys(savedRaveFour.body, [
+        '__v',
+        '_id',
+        'comments',
+        'email',
+        'pet'
+      ]);
     }),
     it('GET /raves returns all four raves (2 per pet) plus pet name & type', async () => {
       const getRaves = await req.get('/raves');
