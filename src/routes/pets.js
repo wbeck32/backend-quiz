@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Pet = require('../models/Pet');
 const Rave = require('../models/Rave');
 
