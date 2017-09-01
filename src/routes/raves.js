@@ -5,8 +5,9 @@ const Rave = require('../models/Rave');
 
 router
   .post('/', async (req, res, next) => {
-    const rave = req.body;
-    const aPet = await Pet.findOne();
+    const rave = req.body.rave;
+    const type = req.body.type;
+    const aPet = await Pet.findOne({'type': type});
     const newRave = new Rave({comments: rave.comments, email: rave.email, pet: aPet._id})
     const savedRave = await newRave.save(newRave);
     res.send(savedRave);

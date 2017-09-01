@@ -14,12 +14,6 @@ let {
 
 describe('e2e routes tests', () => {
   before(async () => {
-    let birdPet,
-      fishPet,
-      raveOne,
-      raveTwo,
-      raveThree,
-      raveFour = null;
     await connect();
     await connection.dropDatabase();
   });
@@ -40,8 +34,8 @@ describe('e2e routes tests', () => {
     });
 
   it('POST two raves from one user email to both of the pets', async () => {
-    const savedRaveOne = await req.post('/raves').send(raveOne);
-    const savedRaveTwo = await req.post('/raves').send(raveTwo);
+    const savedRaveOne = await req.post('/raves').send({rave: raveOne, type: 'bird'});
+    const savedRaveTwo = await req.post('/raves').send({rave: raveTwo, type: 'bird'});
     assert.equal(savedRaveOne.body.email, 'pet@petme.com');
     assert.equal(savedRaveTwo.body.email, 'pet@petme.com');
     assert.deepEqual(savedRaveOne.body.pet, savedRaveTwo.body.pet);
@@ -55,8 +49,8 @@ describe('e2e routes tests', () => {
     ]);
   }),
     it('POST two raves from another user email to both of the pets', async () => {
-      const savedRaveThree = await req.post('/raves').send(raveThree);
-      const savedRaveFour = await req.post('/raves').send(raveFour);
+      const savedRaveThree = await req.post('/raves').send({rave: raveThree, type: 'fish'});
+      const savedRaveFour = await req.post('/raves').send({rave: raveFour, type: 'fish'});
       assert.equal(savedRaveThree.body.email, 'larry@koala.com');
       assert.equal(savedRaveFour.body.email, 'larry@koala.com');
       assert.deepEqual(savedRaveThree.body.pet, savedRaveFour.body.pet);
