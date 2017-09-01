@@ -10,7 +10,7 @@ const petSchema = new Schema({
   },
   breed: { type: String, required: false },
   catchPhrase: { type: String, required: false, maxlength: 140 },
-  raves: { type: mongoose.Schema.Types.Array, required: false }
+  raves: {type: mongoose.SchemaTypes.Array, required:false, ref: 'Rave'}
 });
 
 module.exports = mongoose.model('Pet', petSchema);
